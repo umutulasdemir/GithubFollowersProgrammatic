@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomLabel: UILabel {
+class CustomBodyLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,20 +18,20 @@ class CustomLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(textAlignment: NSTextAlignment, fontSize: CGFloat){
+    init(textAlignment: NSTextAlignment){
         super.init(frame: .zero)
         self.textAlignment = textAlignment
-        self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         configure()
     }
     
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
         
-        textColor = .label
+        font = UIFont.preferredFont(forTextStyle: .body)
+        textColor = .secondaryLabel
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.9
-        lineBreakMode = .byTruncatingTail
+        minimumScaleFactor = 0.75
+        lineBreakMode = .byWordWrapping
     }
     
 }
