@@ -87,7 +87,6 @@ class SearchVC: UIViewController {
             return
         }
         
-        
         let followerListVC = FollowerListVC()
         followerListVC.username = usernameTextField.text
         followerListVC.title = usernameTextField.text
@@ -98,6 +97,8 @@ class SearchVC: UIViewController {
 extension SearchVC: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("Did Tap Return")
+        textField.resignFirstResponder()
+        pushFollowersList()
         return true
     }
 }

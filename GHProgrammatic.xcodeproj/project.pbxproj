@@ -31,6 +31,7 @@
 		2DAA88962BF8BC79000AF247 /* CustomBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAA88952BF8BC79000AF247 /* CustomBodyLabel.swift */; };
 		2DAA889A2BF8BDDD000AF247 /* CustomPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAA88992BF8BDDD000AF247 /* CustomPopupVC.swift */; };
 		2DAA889C2BF909CA000AF247 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAA889B2BF909CA000AF247 /* UIViewController+Ext.swift */; };
+		2DCBB6672BFBAE7F00D13BEB /* FollowerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBB6662BFBAE7F00D13BEB /* FollowerListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		2DAA88952BF8BC79000AF247 /* CustomBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBodyLabel.swift; sourceTree = "<group>"; };
 		2DAA88992BF8BDDD000AF247 /* CustomPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupVC.swift; sourceTree = "<group>"; };
 		2DAA889B2BF909CA000AF247 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		2DCBB6662BFBAE7F00D13BEB /* FollowerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 		2D4CDDDA2BEA61D3005CA01B /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				2DCBB6652BFBAE5800D13BEB /* ViewModel */,
 				2D87A6182BF922F10047D534 /* Model */,
 				2D87A6152BF922B70047D534 /* View */,
 			);
@@ -266,6 +269,14 @@
 				2D87A62A2BFA3DA10047D534 /* UIHelper.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		2DCBB6652BFBAE5800D13BEB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2DCBB6662BFBAE7F00D13BEB /* FollowerListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCBB6672BFBAE7F00D13BEB /* FollowerListViewModel.swift in Sources */,
 				2D87A6292BFA21E00047D534 /* CustomAvatarImageView.swift in Sources */,
 				2DAA88922BF7ED74000AF247 /* String+Ext.swift in Sources */,
 				2DAA88942BF8BA98000AF247 /* CustomLabel.swift in Sources */,
