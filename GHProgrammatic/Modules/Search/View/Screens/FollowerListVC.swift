@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - FollowerListViewModelDelegate Protocol
+
 protocol FollowerListViewModelDelegate: AnyObject {
     func didUpdateFollowers()
     func didFailWithError(_ error: ErrorMessage)
@@ -14,7 +16,11 @@ protocol FollowerListViewModelDelegate: AnyObject {
     func hideLoading()
 }
 
+// MARK: - FollowerListVC
+
 class FollowerListVC: UIViewController {
+    
+    // MARK: - Section Enum
     
     enum Section { case main }
     
@@ -24,6 +30,7 @@ class FollowerListVC: UIViewController {
     var viewModel: FollowerListViewModel!
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, FollowerEntity>!
+    var searchController: UISearchController!
 
     // MARK: - Lifecycle Methods
     
@@ -32,6 +39,7 @@ class FollowerListVC: UIViewController {
         configureViewController()
         configureCollectionView()
         configureDataSource()
+        configureSearchController()
         viewModel = FollowerListViewModel(delegate: self)
         viewModel.username = username
         viewModel.getFollowers(username: username ?? "", page: viewModel.page)
@@ -57,6 +65,15 @@ class FollowerListVC: UIViewController {
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
     }
     
+    private func configureSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for a username"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, FollowerEntity>(collectionView: collectionView, cellProvider: { collectionView, indexPath, follower -> UICollectionViewCell? in
             
@@ -69,10 +86,10 @@ class FollowerListVC: UIViewController {
     
     // MARK: - Data Handling
     
-    private func updateData() {
+    private func updateData(on followers: [FollowerEntity]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, FollowerEntity>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(viewModel.followers)
+        snapshot.appendItems(followers)
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
@@ -99,7 +116,7 @@ extension FollowerListVC: UICollectionViewDelegate {
 
 extension FollowerListVC: FollowerListViewModelDelegate {
     func didUpdateFollowers() {
-        updateData()
+        updateData(on: viewModel.filteredFollowers)
         hideLoading()
     }
     
@@ -114,5 +131,19 @@ extension FollowerListVC: FollowerListViewModelDelegate {
     
     func hideLoading() {
         dismissLoadingView()
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension FollowerListVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+            viewModel.filteredFollowers = viewModel.followers
+            updateData(on: viewModel.followers)
+            return
+        }
+        
+        viewModel.filterFollowers(with: filter)
     }
 }

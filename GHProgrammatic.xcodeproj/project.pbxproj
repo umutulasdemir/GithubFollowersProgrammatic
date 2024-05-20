@@ -32,6 +32,7 @@
 		2DAA889A2BF8BDDD000AF247 /* CustomPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAA88992BF8BDDD000AF247 /* CustomPopupVC.swift */; };
 		2DAA889C2BF909CA000AF247 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAA889B2BF909CA000AF247 /* UIViewController+Ext.swift */; };
 		2DCBB6672BFBAE7F00D13BEB /* FollowerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBB6662BFBAE7F00D13BEB /* FollowerListViewModel.swift */; };
+		2DCBB66D2BFBBCA500D13BEB /* CustomEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBB66C2BFBBCA500D13BEB /* CustomEmptyStateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		2DAA88992BF8BDDD000AF247 /* CustomPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupVC.swift; sourceTree = "<group>"; };
 		2DAA889B2BF909CA000AF247 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		2DCBB6662BFBAE7F00D13BEB /* FollowerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewModel.swift; sourceTree = "<group>"; };
+		2DCBB66C2BFBBCA500D13BEB /* CustomEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmptyStateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,12 +181,13 @@
 		2D4CDDD62BEA6190005CA01B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2D4CDDD72BEA61BB005CA01B /* CustomButton.swift */,
-				2DAA888C2BF7AA0E000AF247 /* CustomTextField.swift */,
-				2DAA88932BF8BA98000AF247 /* CustomLabel.swift */,
-				2DAA88952BF8BC79000AF247 /* CustomBodyLabel.swift */,
-				2DAA88992BF8BDDD000AF247 /* CustomPopupVC.swift */,
 				2D87A6282BFA21E00047D534 /* CustomAvatarImageView.swift */,
+				2DAA88952BF8BC79000AF247 /* CustomBodyLabel.swift */,
+				2D4CDDD72BEA61BB005CA01B /* CustomButton.swift */,
+				2DCBB66C2BFBBCA500D13BEB /* CustomEmptyStateView.swift */,
+				2DAA88932BF8BA98000AF247 /* CustomLabel.swift */,
+				2DAA88992BF8BDDD000AF247 /* CustomPopupVC.swift */,
+				2DAA888C2BF7AA0E000AF247 /* CustomTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -221,9 +224,9 @@
 		2D87A6152BF922B70047D534 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2D4CDDDB2BEA61FF005CA01B /* SearchVC.swift */,
-				2DAA888E2BF7E768000AF247 /* FollowerListVC.swift */,
-				2D87A6262BFA21300047D534 /* FollowerCell.swift */,
+				2DCBB6682BFBBBAD00D13BEB /* Screens */,
+				2DCBB66A2BFBBBBC00D13BEB /* Cells */,
+				2DCBB66B2BFBBC3100D13BEB /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -277,6 +280,30 @@
 				2DCBB6662BFBAE7F00D13BEB /* FollowerListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2DCBB6682BFBBBAD00D13BEB /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2D4CDDDB2BEA61FF005CA01B /* SearchVC.swift */,
+				2DAA888E2BF7E768000AF247 /* FollowerListVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		2DCBB66A2BFBBBBC00D13BEB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2D87A6262BFA21300047D534 /* FollowerCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2DCBB66B2BFBBC3100D13BEB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCBB66D2BFBBCA500D13BEB /* CustomEmptyStateView.swift in Sources */,
 				2DCBB6672BFBAE7F00D13BEB /* FollowerListViewModel.swift in Sources */,
 				2D87A6292BFA21E00047D534 /* CustomAvatarImageView.swift in Sources */,
 				2DAA88922BF7ED74000AF247 /* String+Ext.swift in Sources */,

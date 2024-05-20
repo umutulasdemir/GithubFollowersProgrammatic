@@ -12,6 +12,7 @@ class FollowerListViewModel {
     
     var username: String?
     var followers: [FollowerEntity] = []
+    var filteredFollowers: [FollowerEntity] = []
     var page: Int = 1
     var hasMoreFollowers = true
     
@@ -28,10 +29,16 @@ class FollowerListViewModel {
             case .success(let followers):
                 if followers.count < 50 { self.hasMoreFollowers = false }
                 self.followers.append(contentsOf: followers)
+                self.filteredFollowers = self.followers
                 self.delegate?.didUpdateFollowers()
             case .failure(let errorMessage):
                 self.delegate?.didFailWithError(errorMessage)
             }
         }
+    }
+    
+    func filterFollowers(with filter: String) {
+        filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
+        delegate?.didUpdateFollowers()
     }
 }

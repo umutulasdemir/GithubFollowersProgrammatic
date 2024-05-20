@@ -7,7 +7,7 @@
 
 import UIKit
 
-fileprivate var containerView: UIView!
+fileprivate var containerView: UIView?
 
 extension UIViewController {
     
@@ -22,6 +22,7 @@ extension UIViewController {
     
     func showLoadingView() {
         containerView = UIView(frame: view.bounds)
+        guard let containerView else { return }
         view.addSubview(containerView)
         
         containerView.backgroundColor = .systemBackground
@@ -45,8 +46,14 @@ extension UIViewController {
     
     func dismissLoadingView() {
         DispatchQueue.main.async {
-            containerView.removeFromSuperview()
+            containerView?.removeFromSuperview()
             containerView = nil
         }
+    }
+    
+    func showEmptyStateView(with message: String, in view: UIView) {
+        let emptyStateView = CustomEmptyStateView(message: message)
+        emptyStateView.frame = view.bounds
+        view.addSubview(emptyStateView)
     }
 }
