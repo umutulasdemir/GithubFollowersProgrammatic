@@ -5,47 +5,44 @@
 //  Created by Umut Ulaş Demir on 18.05.2024.
 //
 
-
 import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
-    private let baseURL = "https://api.github.com/users/"
+    private let session: URLSession = URLSession(configuration: .default)
     let cache = NSCache<NSString, UIImage>()
     
     private init() {}
     
-    func getFollowers(for username: String, page: Int, completed: @escaping (Result<[FollowerEntity], ErrorMessage>) -> Void) {
-        let endpoint = baseURL + "\(username)/followers?per_page=51&page=\(page)"
-        
+    func request<T: Decodable>(endpoint: String, completion: @escaping (Result<T, ErrorMessage>) -> Void) {
         guard let url = URL(string: endpoint) else {
-            completed(.failure(.invalidUsername))
+            completion(.failure(.invalidUsername))
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if error != nil {
-                completed(.failure(.unableComplete))
+        let task = session.dataTask(with: url) { data, response, error in
+            if let _ = error {
+                completion(.failure(.unableComplete))
                 return
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completed(.failure(.invalidResponse))
+                completion(.failure(.invalidResponse))
                 return
             }
             
-            guard let data else {
-                completed(.failure(.invalidData))
+            guard let data = data else {
+                completion(.failure(.invalidData))
                 return
             }
             
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let followers = try decoder.decode([FollowerEntity].self, from: data)
-                completed(.success(followers))
+                let result = try decoder.decode(T.self, from: data)
+                completion(.success(result))
             } catch {
-                completed(.failure(.invalidData))
+                completion(.failure(.invalidData))
             }
         }
         

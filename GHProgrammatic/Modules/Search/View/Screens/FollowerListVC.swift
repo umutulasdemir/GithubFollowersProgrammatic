@@ -7,17 +7,6 @@
 
 import UIKit
 
-// MARK: - FollowerListViewModelDelegate Protocol
-
-protocol FollowerListViewModelDelegate: AnyObject {
-    func didUpdateFollowers()
-    func didFailWithError(_ error: ErrorMessage)
-    func showLoading()
-    func hideLoading()
-}
-
-// MARK: - FollowerListVC
-
 class FollowerListVC: UIViewController {
     
     // MARK: - Section Enum
@@ -50,7 +39,7 @@ class FollowerListVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    // MARK: - UI Configuration
+    // MARK: - Configure UI
     
     private func configureViewController() {
         view.backgroundColor = .systemBackground
@@ -99,6 +88,14 @@ class FollowerListVC: UIViewController {
 // MARK: - UICollectionViewDelegate
 
 extension FollowerListVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let follower = viewModel.filteredFollowers[indexPath.item]
+        let userInfoVC = UserInfoVC()
+        userInfoVC.username = follower.login
+        let navController = UINavigationController(rootViewController: userInfoVC)
+        present(navController, animated: true)
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
@@ -117,6 +114,9 @@ extension FollowerListVC: UICollectionViewDelegate {
 extension FollowerListVC: FollowerListViewModelDelegate {
     func didUpdateFollowers() {
         updateData(on: viewModel.filteredFollowers)
+        DispatchQueue.main.async {
+            self.updateSearchResults(for: self.searchController)
+        }
         hideLoading()
     }
     
@@ -131,6 +131,10 @@ extension FollowerListVC: FollowerListViewModelDelegate {
     
     func hideLoading() {
         dismissLoadingView()
+    }
+    
+    func showEmptyState(message: String) {
+        showEmptyStateView(with: message, in: view)
     }
 }
 

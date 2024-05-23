@@ -16,7 +16,7 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        configureUI()
         configureTapGesture()
     }
     
@@ -26,8 +26,9 @@ class SearchVC: UIViewController {
     }
     
     
-    //MARK: - SET THE VIEW
-    func setupUI(){
+    //MARK: - Configure UI
+    
+    func configureUI(){
         view.backgroundColor = .systemBackground
         configureLogoImageView()
         configureTextField()
