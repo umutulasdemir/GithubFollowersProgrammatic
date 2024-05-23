@@ -1,6 +1,6 @@
-# GHProgrammatic
+# GithubFollowersProgrammatic
 
-GHProgrammatic is an iOS application that allows users to search for GitHub users and view their followers programmatically. The app is built using the MVVM architecture and focuses on providing a clean and maintainable codebase with protocol-oriented programming.
+GithubFollowersProgrammatic is an iOS application that allows users to search for GitHub users and view their followers programmatically. The app is built using the MVVM architecture and focuses on providing a clean and maintainable codebase with protocol-oriented programming.
 
 ## Features
 
